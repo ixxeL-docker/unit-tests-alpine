@@ -42,14 +42,6 @@ jobs:
         format: 'json'
         treshold: 'error'
         working-dir: '${WORKING_DIR}'
-#     - name: Lint with Hadolint
-#       id: lint-hadolint
-#       run: |
-#         echo -e "${BLUE}[ STEP - LINTING DOCKERFILE ] > Linting ${IMAGE_NAME} Dockerfile with Hadolint.${BLANK}"
-#         echo -e "${CYAN}[ INFO ] > Hadolint version.${BLANK}"
-#         hadolint --version
-#         echo -e "${YELLOW}[ EXECUTING ] > Executing Dockerfile linting.${BLANK}"
-#         hadolint ${WORKING_DIR}/Dockerfile --ignore DL3007 --ignore DL3017 --ignore DL3018 --ignore DL4001 --ignore DL4006 --ignore DL3013 --ignore DL3016 --ignore DL3059
   build:
     needs: [test]
     strategy:
