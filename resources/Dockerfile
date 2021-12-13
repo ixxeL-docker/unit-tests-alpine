@@ -30,6 +30,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositori
     py3-pip \
     skopeo \
     shellcheck \
+    black \
     nodejs \
     npm \
     tzdata \
