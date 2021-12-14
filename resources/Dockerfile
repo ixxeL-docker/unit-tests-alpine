@@ -38,4 +38,4 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositori
 
 RUN pip3 install --no-cache-dir flake8 flake8-json pytest pytest-cov coverage bandit
 
-RUN npm install jslint eslint jshint
+RUN npm install -g jslint eslint jshint
