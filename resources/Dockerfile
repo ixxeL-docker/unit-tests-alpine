@@ -44,4 +44,7 @@ RUN npm install -g install-peerdeps \
                    jshint
 
 RUN npx install-peerdeps -g eslint-config-airbnb \
-                           eslint-config-google
+                            eslint-config-airbnb-base \
+                            eslint-config-standard \
+                            eslint-config-prettier \
+                            eslint-config-google
