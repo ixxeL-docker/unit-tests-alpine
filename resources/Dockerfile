@@ -4,7 +4,10 @@ RUN apk update --no-cache \
     && apk add curl --no-cache --update \
     && curl -sLO "https://github.com/hadolint/hadolint/releases/latest/download/hadolint-Linux-x86_64" \
     && chmod +x hadolint-Linux-x86_64 \
-    && mv ./hadolint-Linux-x86_64 /usr/local/bin/hadolint 
+    && mv ./hadolint-Linux-x86_64 /usr/local/bin/hadolint \
+    && curl -sL "https://github.com/stackrox/kube-linter/releases/latest/download/kube-linter-linux.tar.gz" | tar -xz \
+    && chmod +x kube-linter \
+    && mv ./kube-linter /usr/local/bin/kube-linter
 
 FROM alpine:latest
 
@@ -14,7 +17,7 @@ LABEL maintainer="Frederic Spiers <fredspiers@gmail.com>" \
 ENV TZ="Europe/Paris" \
     IMG_VERSION="1.1.0"
 
-COPY --from=builder /usr/local/bin/hadolint /usr/local/bin/
+COPY --from=builder /usr/local/bin/hadolint /usr/local/bin/kube-linter /usr/local/bin
 
 WORKDIR /usr/app
 
