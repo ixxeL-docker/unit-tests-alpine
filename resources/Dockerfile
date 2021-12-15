@@ -44,7 +44,8 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositori
     nodejs \
     npm \
     tzdata \
-    && cp /usr/share/zoneinfo/${TZ} /etc/localtime
+    && cp /usr/share/zoneinfo/${TZ} /etc/localtime \
+    && ln -s python3 python
 
 RUN pip3 install --no-cache-dir flake8 flake8-json pytest pytest-cov coverage bandit
 
