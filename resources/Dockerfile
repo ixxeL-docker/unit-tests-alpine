@@ -20,7 +20,7 @@ LABEL maintainer="Frederic Spiers <fredspiers@gmail.com>" \
 ENV TZ="Europe/Paris" \
     IMG_VERSION="1.1.0"
 
-COPY --from=builder /usr/local/bin/kubesec /usr/local/bin/hadolint /usr/local/bin/kube-linter /usr/local/bin
+COPY --from=builder /usr/local/bin/kubesec /usr/local/bin/hadolint /usr/local/bin/kube-linter /usr/local/bin/
 
 WORKDIR /usr/app
 
