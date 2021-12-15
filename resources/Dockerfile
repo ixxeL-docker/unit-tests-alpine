@@ -7,7 +7,10 @@ RUN apk update --no-cache \
     && mv ./hadolint-Linux-x86_64 /usr/local/bin/hadolint \
     && curl -sL "https://github.com/stackrox/kube-linter/releases/latest/download/kube-linter-linux.tar.gz" | tar -xz \
     && chmod +x kube-linter \
-    && mv ./kube-linter /usr/local/bin/kube-linter
+    && mv ./kube-linter /usr/local/bin/kube-linter \
+    && curl -sL "https://github.com/controlplaneio/kubesec/releases/latest/download/kubesec_linux_amd64.tar.gz" | tar -xz \
+    && chmod +x kubesec \
+    && mv ./kubesec /usr/local/bin/kubesec
 
 FROM alpine:latest
 
@@ -17,7 +20,7 @@ LABEL maintainer="Frederic Spiers <fredspiers@gmail.com>" \
 ENV TZ="Europe/Paris" \
     IMG_VERSION="1.1.0"
 
-COPY --from=builder /usr/local/bin/hadolint /usr/local/bin/kube-linter /usr/local/bin
+COPY --from=builder /usr/local/bin/kubesec /usr/local/bin/hadolint /usr/local/bin/kube-linter /usr/local/bin
 
 WORKDIR /usr/app
 
