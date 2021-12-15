@@ -10,7 +10,10 @@ RUN apk update --no-cache \
     && mv ./kube-linter /usr/local/bin/kube-linter \
     && curl -sL "https://github.com/controlplaneio/kubesec/releases/latest/download/kubesec_linux_amd64.tar.gz" | tar -xz \
     && chmod +x kubesec \
-    && mv ./kubesec /usr/local/bin/kubesec
+    && mv ./kubesec /usr/local/bin/kubesec \
+    && curl -sL "https://github.com/zegl/kube-score/releases/download/v1.13.0/kube-score_1.13.0_linux_amd64.tar.gz" | tar -xz \
+    && chmod +x kube-score \
+    && mv ./kube-score /usr/local/bin/kube-score
 
 FROM alpine:latest
 
@@ -20,7 +23,7 @@ LABEL maintainer="Frederic Spiers <fredspiers@gmail.com>" \
 ENV TZ="Europe/Paris" \
     IMG_VERSION="1.1.0"
 
-COPY --from=builder /usr/local/bin/kubesec /usr/local/bin/hadolint /usr/local/bin/kube-linter /usr/local/bin/
+COPY --from=builder /usr/local/bin/kube-score /usr/local/bin/kubesec /usr/local/bin/hadolint /usr/local/bin/kube-linter /usr/local/bin/
 
 WORKDIR /usr/app
 
