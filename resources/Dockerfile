@@ -41,6 +41,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositori
     py3-pip \
     shellcheck \
     black \
+    yamllint \
     nodejs \
     npm \
     tzdata \
