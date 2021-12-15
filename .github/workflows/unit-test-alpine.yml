@@ -25,10 +25,7 @@ env:
 
 jobs:
   test:
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     container: 
       image: ixxel/unit-tests-alpine:latest
     defaults:
@@ -44,10 +41,7 @@ jobs:
         working-dir: '${WORKING_DIR}'
   build:
     needs: [test]
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     container: 
       image: ixxel/multi-tools-alpine:latest
       options: --privileged
