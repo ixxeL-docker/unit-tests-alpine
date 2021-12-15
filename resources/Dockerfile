@@ -39,7 +39,6 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositori
     jq \
     python3 \
     py3-pip \
-    skopeo \
     shellcheck \
     black \
     nodejs \
