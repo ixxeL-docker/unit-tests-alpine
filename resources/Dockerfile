@@ -44,8 +44,8 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositori
     yamllint \
     nodejs \
     npm \
-    tzdata \
     util-linux \
+    tzdata \
     && cp /usr/share/zoneinfo/${TZ} /etc/localtime \
     && ln -s /usr/bin/python3 /usr/bin/python
 
