@@ -15,7 +15,10 @@ RUN apk update --no-cache \
     && KUBE_SCORE_VER_LIGHT=$(echo "${KUBE_SCORE_VERSION}" | sed 's/v//g') \
     && curl -sL "https://github.com/zegl/kube-score/releases/download/${KUBE_SCORE_VERSION}/kube-score_${KUBE_SCORE_VER_LIGHT}_linux_amd64.tar.gz" | tar -xz \
     && chmod +x kube-score \
-    && mv ./kube-score /usr/local/bin/kube-score
+    && mv ./kube-score /usr/local/bin/kube-score \
+    && HELM_VERSION=$(curl -sSL "https://github.com/kubernetes/helm/releases/latest" | grep -oE 'v[0-9]+\.[0-9]+\.[0-9]+' | sort | uniq) \
+    && curl -sSL "https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz" | tar xzv \
+    && mv linux-amd64/helm /usr/local/bin/helm
 
 FROM alpine:latest
 
@@ -25,7 +28,7 @@ LABEL maintainer="Frederic Spiers <fredspiers@gmail.com>" \
 ENV TZ="Europe/Paris" \
     IMG_VERSION="1.2.0"
 
-COPY --from=builder /usr/local/bin/kube-score /usr/local/bin/kubesec /usr/local/bin/hadolint /usr/local/bin/kube-linter /usr/local/bin/
+COPY --from=builder /usr/local/bin/helm /usr/local/bin/kube-score /usr/local/bin/kubesec /usr/local/bin/hadolint /usr/local/bin/kube-linter /usr/local/bin/
 
 WORKDIR /usr/app
 
