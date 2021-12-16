@@ -53,6 +53,7 @@ RUN apk update --no-cache \
 RUN pip3 install --no-cache-dir flake8 flake8-json pytest pytest-cov coverage bandit yamlfix
 
 RUN npm install -g install-peerdeps \
+                   jsonlint \
                    jslint \
                    eslint \
                    jshint \
