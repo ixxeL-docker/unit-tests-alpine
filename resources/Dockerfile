@@ -38,6 +38,7 @@ RUN apk update --no-cache \
     curl \
     bash \
     jq \
+    yq \
     python3 \
     py3-pip \
     shellcheck \
