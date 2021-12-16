@@ -23,13 +23,15 @@ LABEL maintainer="Frederic Spiers <fredspiers@gmail.com>" \
       component="CI/CD tools"
 
 ENV TZ="Europe/Paris" \
-    IMG_VERSION="1.2.0"
+    IMG_VERSION="1.1.0"
 
 COPY --from=builder /usr/local/bin/kube-score /usr/local/bin/kubesec /usr/local/bin/hadolint /usr/local/bin/kube-linter /usr/local/bin/
 
 WORKDIR /usr/app
 
-RUN apk update --no-cache \
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories \
+    && echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
+    && apk update --no-cache \
     && apk upgrade --no-cache \  
     && apk add --no-cache --update \
     curl \
@@ -54,3 +56,9 @@ RUN npm install -g install-peerdeps \
                    eslint \
                    jshint \
                    snyk@latest
+
+# RUN npx install-peerdeps -g eslint-config-airbnb \
+#     && npx install-peerdeps --dev eslint-config-airbnb-base \
+#     && npx install-peerdeps --dev eslint-config-standard \
+#     && npx install-peerdeps --dev eslint-config-prettier \
+#     && npx install-peerdeps --dev eslint-config-google
