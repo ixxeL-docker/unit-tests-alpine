@@ -47,7 +47,7 @@ RUN apk update --no-cache \
     && cp /usr/share/zoneinfo/${TZ} /etc/localtime \
     && ln -s /usr/bin/python3 /usr/bin/python
 
-RUN pip3 install --no-cache-dir flake8 flake8-json pytest pytest-cov coverage bandit
+RUN pip3 install --no-cache-dir flake8 flake8-json pytest pytest-cov coverage bandit yamlfix
 
 RUN npm install -g install-peerdeps \
                    jslint \
