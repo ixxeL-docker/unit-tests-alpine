@@ -57,8 +57,8 @@ RUN npm install -g install-peerdeps \
                    jshint \
                    snyk@latest
 
-RUN npx install-peerdeps -g eslint-config-airbnb \
-    && npx install-peerdeps --dev eslint-config-airbnb-base \
-    && npx install-peerdeps --dev eslint-config-standard \
-    && npx install-peerdeps --dev eslint-config-prettier \
-    && npx install-peerdeps --dev eslint-config-google
+# RUN npx install-peerdeps -g eslint-config-airbnb \
+#     && npx install-peerdeps --dev eslint-config-airbnb-base \
+#     && npx install-peerdeps --dev eslint-config-standard \
+#     && npx install-peerdeps --dev eslint-config-prettier \
+#     && npx install-peerdeps --dev eslint-config-google
