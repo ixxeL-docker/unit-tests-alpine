@@ -33,7 +33,7 @@ COPY --from=builder /usr/local/bin/helm /usr/local/bin/kube-score /usr/local/bin
 WORKDIR /usr/app
 
 RUN apk update --no-cache \
-    && apk upgrade --no-cache \  
+    && apk upgrade --no-cache \
     && apk add --no-cache --update \
     curl \
     bash \
