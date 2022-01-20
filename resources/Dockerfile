@@ -63,7 +63,7 @@ RUN apk add --no-cache --update gcc musl-dev python3-dev libffi-dev \
                                    cpython \
                                    wheel \
                                    checkov \
-    && pip3 uninstall cpython wheel \
+    && pip3 uninstall --yes cpython wheel \
     && apk del gcc musl-dev python3-dev libffi-dev
 
 RUN npm install -g install-peerdeps \
