@@ -50,8 +50,21 @@ RUN apk update --no-cache \
     tzdata \
     && cp /usr/share/zoneinfo/${TZ} /etc/localtime \
     && ln -s /usr/bin/python3 /usr/bin/python
-
-RUN pip3 install --no-cache-dir flake8 flake8-json pytest pytest-cov coverage bandit yamlfix
+    
+RUN apk add --no-cache --update gcc musl-dev python3-dev libffi-dev \
+    && pip3 install --upgrade pip \
+    && pip3 install --no-cache-dir flake8 \
+                                   flake8-json \
+                                   pytest \
+                                   pytest-cov \
+                                   coverage \
+                                   bandit \
+                                   yamlfix \
+                                   cpython \
+                                   wheel \
+                                   checkov \
+    && pip3 uninstall cpython wheel \
+    && apk del gcc musl-dev python3-dev libffi-dev
 
 RUN npm install -g install-peerdeps \
                    @prantlf/jsonlint \
