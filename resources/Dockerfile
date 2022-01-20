@@ -51,18 +51,18 @@ RUN apk update --no-cache \
     && cp /usr/share/zoneinfo/${TZ} /etc/localtime \
     && ln -s /usr/bin/python3 /usr/bin/python
     
-RUN apk add --no-cache --update gcc musl-dev python3-dev libffi-dev \
-    && pip3 install --upgrade pip \
+RUN pip3 install --upgrade pip \
     && pip3 install --no-cache-dir flake8 \
                                    flake8-json \
                                    pytest \
                                    pytest-cov \
                                    coverage \
                                    bandit \
-                                   yamlfix \
-                                   cpython \
-                                   wheel \
-                                   checkov \
+                                   yamlfix
+    
+RUN apk add --no-cache --update gcc musl-dev python3-dev libffi-dev \
+    && pip3 install --no-cache-dir cpython wheel \
+    && pip3 install --no-cache-dir checkov \
     && pip3 uninstall --yes cpython wheel \
     && apk del gcc musl-dev python3-dev libffi-dev
 
