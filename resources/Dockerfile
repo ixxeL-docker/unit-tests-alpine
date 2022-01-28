@@ -2,6 +2,8 @@ FROM alpine:latest AS builder
 
 RUN apk update --no-cache \
     && apk add curl --no-cache --update \
+    && curl -o /usr/local/bin/gitlab-helper -s https://s3.eu-central-1.amazonaws.com/valmano-gitlab-helper/gitlab-helper \
+    && chmod +x /usr/local/bin/gitlab-helper \
     && curl -sLO "https://github.com/hadolint/hadolint/releases/latest/download/hadolint-Linux-x86_64" \
     && chmod +x hadolint-Linux-x86_64 \
     && mv ./hadolint-Linux-x86_64 /usr/local/bin/hadolint \
@@ -28,7 +30,13 @@ LABEL maintainer="Frederic Spiers <fredspiers@gmail.com>" \
 ENV TZ="Europe/Paris" \
     IMG_VERSION="1.2.0"
 
-COPY --from=builder /usr/local/bin/helm /usr/local/bin/kube-score /usr/local/bin/kubesec /usr/local/bin/hadolint /usr/local/bin/kube-linter /usr/local/bin/
+COPY --from=builder /usr/local/bin/gitlab-helper \
+                    /usr/local/bin/helm \
+                    /usr/local/bin/kube-score \
+                    /usr/local/bin/kubesec \
+                    /usr/local/bin/hadolint \
+                    /usr/local/bin/kube-linter \
+                    /usr/local/bin/
 
 WORKDIR /usr/app
 
