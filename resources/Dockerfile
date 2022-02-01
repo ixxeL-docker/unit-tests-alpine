@@ -45,6 +45,7 @@ RUN apk update --no-cache \
     && apk add --no-cache --update \
     curl \
     bash \
+    git \
     jq \
     yq \
     python3 \
@@ -58,7 +59,8 @@ RUN apk update --no-cache \
     tzdata \
     && cp /usr/share/zoneinfo/${TZ} /etc/localtime \
     && ln -s /usr/bin/python3 /usr/bin/python \
-    && helm plugin install "https://github.com/chartmuseum/helm-push"
+    && helm plugin install "https://github.com/chartmuseum/helm-push" \
+    && helm plugin install "https://github.com/databus23/helm-diff"
     
 # RUN pip3 install --upgrade pip \ issues of dependency resolves with pip 21.x
 RUN pip3 install --no-cache-dir flake8 \
