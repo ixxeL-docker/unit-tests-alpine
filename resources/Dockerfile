@@ -28,7 +28,9 @@ LABEL maintainer="Frederic Spiers <fredspiers@gmail.com>" \
       component="CI/CD tools"
 
 ENV TZ="Europe/Paris" \
-    IMG_VERSION="1.2.0"
+    IMG_VERSION="1.3.0"
+    
+COPY --from=ixxel/musl-dns-hack-alpine /lib/ld-musl-x86_64.so.1 /lib/ld-musl-x86_64.so.1
 
 COPY --from=builder /usr/local/bin/gitlab-helper \
                     /usr/local/bin/helm \
