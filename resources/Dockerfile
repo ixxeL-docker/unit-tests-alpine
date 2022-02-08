@@ -73,11 +73,11 @@ RUN pip3 install --no-cache-dir flake8 \
                                    bandit \
                                    yamlfix
     
-RUN apk add --no-cache --update gcc musl-dev python3-dev libffi-dev \
+RUN apk add --virtual=build --no-cache --update gcc musl-dev python3-dev libffi-dev \
     && pip3 install --no-cache-dir cpython wheel \
     && pip3 install --no-cache-dir checkov \
     && pip3 uninstall --yes cpython wheel \
-    && apk del gcc musl-dev python3-dev libffi-dev
+    && apk del --purge build
 
 RUN npm install -g install-peerdeps \
                    @prantlf/jsonlint \
