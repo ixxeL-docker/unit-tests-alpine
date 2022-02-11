@@ -71,7 +71,8 @@ RUN pip3 install --no-cache-dir flake8 \
                                    pytest-cov \
                                    coverage \
                                    bandit \
-                                   yamlfix
+                                   yamlfix \
+                                   python-gitlab
     
 RUN apk add --virtual=build --no-cache --update gcc musl-dev python3-dev libffi-dev \
     && pip3 install --no-cache-dir cpython wheel \
