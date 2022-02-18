@@ -18,6 +18,8 @@ RUN apk update --no-cache \
     && curl -sL "https://github.com/zegl/kube-score/releases/download/${KUBE_SCORE_VERSION}/kube-score_${KUBE_SCORE_VER_LIGHT}_linux_amd64.tar.gz" | tar -xz \
     && chmod +x kube-score \
     && mv ./kube-score /usr/local/bin/kube-score \
+    && curl -sSL -o /usr/local/bin/semver "https://raw.githubusercontent.com/fsaintjacques/semver-tool/master/src/semver" \
+    && chmod +x /usr/local/bin/semver \
     && HELM_VERSION=$(curl -sSL "https://github.com/kubernetes/helm/releases/latest" | grep -oE 'v[0-9]+\.[0-9]+\.[0-9]+' | sort | uniq | tail -1) \
     && curl -sSL "https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz" | tar xzv \
     && mv linux-amd64/helm /usr/local/bin/helm
@@ -38,6 +40,7 @@ COPY --from=builder /usr/local/bin/gitlab-helper \
                     /usr/local/bin/kubesec \
                     /usr/local/bin/hadolint \
                     /usr/local/bin/kube-linter \
+                    /usr/local/bin/semver \
                     /usr/local/bin/
 
 WORKDIR /usr/app
@@ -67,13 +70,13 @@ RUN apk update --no-cache \
     
 # RUN pip3 install --upgrade pip \ issues of dependency resolves with pip 21.x
 RUN pip3 install --no-cache-dir flake8 \
-                                   flake8-json \
-                                   pytest \
-                                   pytest-cov \
-                                   coverage \
-                                   bandit \
-                                   yamlfix \
-                                   python-gitlab
+                                flake8-json \
+                                pytest \
+                                pytest-cov \
+                                coverage \
+                                bandit \
+                                yamlfix \
+                                python-gitlab
     
 RUN apk add --virtual=build --no-cache --update gcc musl-dev python3-dev libffi-dev \
     && pip3 install --no-cache-dir cpython wheel \
