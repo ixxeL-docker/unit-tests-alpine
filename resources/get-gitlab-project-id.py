@@ -1,5 +1,4 @@
 import gitlab
-import os
 from envparse import env
 
 GITLAB_URL = env('GITLAB_URL')
