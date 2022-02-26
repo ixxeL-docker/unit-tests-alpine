@@ -45,7 +45,7 @@ COPY --from=builder /usr/local/bin/gitlab-helper \
 
 WORKDIR /usr/app
 
-COPY ./get-gitlab-project-id.py .
+COPY ./get-gitlab-project-id.py /usr/local/bin/get-gitlab-project-id
 
 RUN apk update --no-cache \
     && apk upgrade --no-cache \
