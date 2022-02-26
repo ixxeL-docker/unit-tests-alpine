@@ -64,6 +64,7 @@ RUN apk update --no-cache \
     npm \
     util-linux \
     tzdata \
+    && chmod +x /usr/local/bin/get-gitlab-project-id \
     && cp /usr/share/zoneinfo/${TZ} /etc/localtime \
     && ln -s /usr/bin/python3 /usr/bin/python \
     && helm plugin install "https://github.com/chartmuseum/helm-push" \
