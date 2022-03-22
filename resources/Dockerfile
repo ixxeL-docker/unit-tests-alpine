@@ -43,7 +43,7 @@ COPY --from=builder /usr/local/bin/gitlab-helper \
                     /usr/local/bin/semver \
                     /usr/local/bin/
 
-WORKDIR /usr/app
+WORKDIR /usr/app 
 
 COPY ./get-gitlab-project-id.py /usr/local/bin/get-gitlab-project-id
 
