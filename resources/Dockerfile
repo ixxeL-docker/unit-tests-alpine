@@ -22,7 +22,9 @@ RUN apk update --no-cache \
     && chmod +x /usr/local/bin/semver \
     && HELM_VERSION=$(curl -sSL "https://github.com/kubernetes/helm/releases/latest" | grep -oE 'v[0-9]+\.[0-9]+\.[0-9]+' | sort | uniq | tail -1) \
     && curl -sSL "https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz" | tar xzv \
-    && mv linux-amd64/helm /usr/local/bin/helm
+    && mv linux-amd64/helm /usr/local/bin/helm \
+    && curl -sL "https://github.com/vmware-tanzu/carvel-ytt/releases/latest/download/ytt-linux-amd64" -o /usr/local/bin/ytt \
+    && chmod +x /usr/local/bin/ytt
 
 FROM alpine:latest
 
@@ -41,6 +43,7 @@ COPY --from=builder /usr/local/bin/gitlab-helper \
                     /usr/local/bin/hadolint \
                     /usr/local/bin/kube-linter \
                     /usr/local/bin/semver \
+                    /usr/local/bin/ytt \
                     /usr/local/bin/
 
 WORKDIR /usr/app 
